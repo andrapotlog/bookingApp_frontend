@@ -1,0 +1,114 @@
+<div class="main">
+  <h1>Booking Camera Pensiune</h1>
+
+  <div class="main-form">
+    <form class="main-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <input
+        formControlName="firstName"
+        type="text"
+        class="form-control"
+        placeholder="First Name"
+      />
+      <mat-error *ngIf="form.controls.firstName.hasError('pattern')"
+        >Invalid input</mat-error
+      ><br />
+      <input
+        formControlName="lastName"
+        type="text"
+        class="form-control"
+        placeholder="Last Name"
+      />
+      <mat-error *ngIf="form.controls.lastName.hasError('pattern')"
+        >Invalid input</mat-error
+      ><br />
+      <input
+        formControlName="capacity"
+        type="number"
+        min="0"
+        class="form-control"
+        placeholder="Capacity of room"
+      /><br />
+      <input
+        formControlName="cnp"
+        type="text"
+        class="form-control"
+        placeholder="ID"
+        pattern="\d*"
+      />
+      <mat-error *ngIf="form.controls.lastName.hasError('pattern')"
+        >Invalid input</mat-error
+      >
+      <mat-error *ngIf="under18(form.controls.cnp.value)"
+        >You must be 18 or older!</mat-error
+      >
+      <mat-error *ngIf="!cnpValidation(form.controls.cnp.value)"
+        >Invalid input</mat-error
+      >
+      <br />
+
+      <mat-form-field appearance="fill" class="main-form-datepicker">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input
+          [rangePicker]="picker"
+          [dateFilter]="unavailableDays"
+          formGroupName="daterange"
+        >
+          <input
+            matStartDate
+            formControlName="start"
+            placeholder="Start date"
+          />
+          <input matEndDate formControlName="end" placeholder="End date" />
+        </mat-date-range-input>
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+
+        <mat-error
+          *ngIf="
+            form.controls.daterange.controls.start.hasError(
+              'matStartDateInvalid'
+            )
+          "
+          >Invalid start date</mat-error
+        >
+        <mat-error
+          *ngIf="
+            form.controls.daterange.controls.end.hasError('matEndDateInvalid')
+          "
+          >Invalid end date</mat-error
+        >
+      </mat-form-field>
+      <br />
+
+      <div *ngIf="!form.invalid" class="main-form-price">
+        Price is {{ calculatePrice() }} RON
+      </div>
+
+      <section class="example-section">
+        <mat-checkbox
+          class="main-form-checkbox"
+          [(ngModel)]="checked"
+          [ngModelOptions]="{ standalone: true }"
+          [disabled]="under18(form.controls.cnp.value)"
+          >I have over 18 years old</mat-checkbox
+        >
+      </section>
+
+      <button
+        mat-raised-button
+        class="main-form-submit"
+        type="submit"
+        color="primary"
+        [disabled]="
+          form.invalid || under18(form.controls.cnp.value) || !checked
+        "
+      >
+        Book room
+      </button>
+    </form>
+    <a href="http://localhost:4200/charts"
+      ><button class="main-charts-bttn">Charts</button></a
+    >
+  </div>
+</div>

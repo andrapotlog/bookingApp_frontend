@@ -1,0 +1,23 @@
+<div id="report" #report class="charts-wrapper">
+  <div class="charts-title"><p>REPORTS</p></div>
+  <div class="charts-header"><p>Percentage of bookings depending on room type</p></div>
+  <div id="chart1" class="chart">
+    <apx-chart
+      [series]="chartOne.series"
+      [chart]="chartOne.chart"
+      [labels]="chartOne.labels"
+      [responsive]="chartOne.responsive"
+    ></apx-chart>
+  </div>
+
+  <div class="charts-header"><p>Percentage of bookings depending on period</p></div>
+  <div id="chart2" class="chart">
+    <apx-chart
+      [series]="chartTwo.series"
+      [chart]="chartTwo.chart"
+      [labels]="chartTwo.labels"
+      [responsive]="chartTwo.responsive"
+    ></apx-chart>
+  </div>
+  <button class="btn btn-primary" (click)="downloadAsPDF()">Export To PDF</button>
+</div>

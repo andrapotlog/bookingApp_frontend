@@ -1,0 +1,22 @@
+.charts-wrapper {
+  /*margin: auto;*/
+  height: 100%;
+}
+
+.charts-title {
+  padding-top: 50px;
+  font-size: 30px;
+  margin-left: 160px;
+}
+
+.charts-header {
+  margin-top: 30px;
+  margin-left: 25px;
+  font-size: 17px;
+}
+
+.chart {
+  max-width: 700px;
+ /* margin: 35px auto;
+  padding: 0;*/
+}
